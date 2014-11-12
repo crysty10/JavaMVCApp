@@ -33,6 +33,12 @@ public class MethodAttributes {
         this.methodType = methodType;
     }
 
+    public String toString() {
+        return this.getControllerClass() +
+                this.getMethodName() +
+                this.getMethodType();
+    }
+
     @Override
     public boolean equals(Object o) {
         if(this == o) {

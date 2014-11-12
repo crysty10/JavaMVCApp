@@ -24,7 +24,7 @@ public class AnnotationScanUtils {
     {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         String path = packageName.replace('.', '/');
-        System.out.println(path);
+        //System.out.println(path);
         Enumeration<URL> resources = classLoader.getResources(path);
         List<File> dirs = new ArrayList<File>();
         while (resources.hasMoreElements())

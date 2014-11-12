@@ -32,7 +32,7 @@ public class ResultSetToPojoConverter {
             Employee employee = new Employee();
             Job job = jobDao.getJobById(con,rs.getString("job_id"));
             Department department = departmentDao.getDepartmentById(con, rs.getLong("department_id"));
-            Employee manager =  employeeDao.getEmployeeById(con, rs.getLong("manager_id"));
+            Employee manager = employeeDao.getEmployeeById(con, rs.getLong("manager_id"));
 
 
             employee.setId(rs.getLong("employee_id"));
