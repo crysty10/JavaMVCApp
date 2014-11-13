@@ -11,4 +11,5 @@ public interface EmployeeService {
 
     List<Employee> findAllEmployees();
     Employee findOneEmployee(Long id);
+    void deteleOneEmployee(Long id);
 }

@@ -62,4 +62,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return new Employee();
     }
+
+    @Override
+    public void deteleOneEmployee(Long id) {
+
+        EmployeeDao employeeDao = new EmployeeDao();
+        Connection con = DatabaseManager.getConnection(username, password);
+
+        try {
+            Employee emp = employeeDao.getEmployeeById(con, id);
+            employeeDao.deleteEmployee(emp, con);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

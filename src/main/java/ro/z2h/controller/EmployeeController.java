@@ -25,11 +25,18 @@ public class EmployeeController {
     }
 
     @MyRequestMethod(urlPath = "/one")
-    public Employee getOneEmployee(Long id) {
+    public Employee getOneEmployee(String id) {
         Employee emp = new Employee();
         EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
-        emp = employeeService.findOneEmployee(id);
+        emp = employeeService.findOneEmployee(Long.valueOf(id));
 
         return emp;
+    }
+
+    @MyRequestMethod(urlPath = "/delete")
+    public void deleteOneEmployee(String id) {
+
+        EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
+        employeeService.deteleOneEmployee(Long.valueOf(id));
     }
 }

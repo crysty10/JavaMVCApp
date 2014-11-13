@@ -18,7 +18,11 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Dumitru on 11.11.2014.
@@ -122,7 +126,7 @@ public class MyDispatcherServlet extends HttpServlet {
             return dc.getAllDepartments();
         }
         return "Hello from Z2H!";*/
-
+        //Map<String, String[]> parameterMap = req.getParameterMap();
         MethodAttributes metAtt = hmPath.get(pathInfo);
         if(metAtt != null) {
             //am un app controllet care sa-mi proceseze
@@ -131,7 +135,16 @@ public class MyDispatcherServlet extends HttpServlet {
                 String methodName = metAtt.getMethodName();
                 Object controllerInstance = controllerClass.newInstance();
                 Method method = controllerClass.getMethod(methodName, metAtt.getMethodParameterTypes());
-                Object invoke = method.invoke(controllerInstance);
+
+                Parameter[] parameters = method.getParameters();
+                List<String> methodParamValues = new ArrayList<String>();
+                for(Parameter param : parameters) {
+
+                    String value = req.getParameter(param.getName());
+                    methodParamValues.add(value);
+                }
+
+                return method.invoke(controllerInstance, (String[])methodParamValues.toArray(new String[0]));
 
                 /*String methodName = metAtt.getMethodName();
                 Class[] parameterTypes = new Class[] {Long.class};
@@ -149,9 +162,8 @@ public class MyDispatcherServlet extends HttpServlet {
                     Method method = controllerClass.getMethod(methodName);
                     Object controllerInstance = controllerClass.newInstance();
                     invoke = method.invoke(controllerInstance);
-                }*/
-
-                return invoke;
+                }
+                return invoke;*/
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (InstantiationException e) {

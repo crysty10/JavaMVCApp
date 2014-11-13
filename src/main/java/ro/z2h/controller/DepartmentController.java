@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Dumitru on 11.11.2014.
  */
-@MyController(urlPath = "/department")
+@MyController(urlPath = "/departments")
 public class DepartmentController {
 
     @MyRequestMethod(urlPath = "/all")

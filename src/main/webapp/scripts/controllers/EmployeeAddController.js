@@ -1,16 +1,16 @@
 hrApp.controller('EmployeeAddController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
     $scope.employee = {};
 
-    $http({url: 'http://localhost:8282/datamodel/departments/findAll', method: 'GET'}).
+    $http({url: 'http://localhost:8080/app/mvc/departments/all', method: 'GET'}).
         success(function (data) {
             $scope.departments = data;
         });
-    $http({url: 'http://localhost:8282/datamodel/employees/findAll', method: 'GET'}).
+    $http({url: 'http://localhost:8080/app/mvc/employees/all', method: 'GET'}).
         success(function (data) {
             $scope.managers = data;
         });
 
-    $http({url: 'http://localhost:8282/datamodel/jobs/findAll', method: 'GET'}).
+    $http({url: 'http://localhost:8080/app/mvc/jobs/all', method: 'GET'}).
         success(function (data) {
             $scope.jobs = data;
         });
