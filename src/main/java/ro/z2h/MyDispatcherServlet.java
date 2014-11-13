@@ -58,6 +58,9 @@ public class MyDispatcherServlet extends HttpServlet {
                             ma.setMethodName(met.getName());
                             ma.setControllerClass(aClass.getName());
                             ma.setMethodType(mrm.methodType());
+                            //TODO
+                            //add param types
+                            ma.setMethodParameterTypes(met.getParameterTypes());
                             hmPath.put(path, ma);
                         }
                     }
@@ -125,8 +128,12 @@ public class MyDispatcherServlet extends HttpServlet {
             //am un app controllet care sa-mi proceseze
             try {
                 Class<?> controllerClass = Class.forName(metAtt.getControllerClass());
-
                 String methodName = metAtt.getMethodName();
+                Object controllerInstance = controllerClass.newInstance();
+                Method method = controllerClass.getMethod(methodName, metAtt.getMethodParameterTypes());
+                Object invoke = method.invoke(controllerInstance);
+
+                /*String methodName = metAtt.getMethodName();
                 Class[] parameterTypes = new Class[] {Long.class};
                 Object[] parameters = null;
                 Object invoke = null;
@@ -142,7 +149,7 @@ public class MyDispatcherServlet extends HttpServlet {
                     Method method = controllerClass.getMethod(methodName);
                     Object controllerInstance = controllerClass.newInstance();
                     invoke = method.invoke(controllerInstance);
-                }
+                }*/
 
                 return invoke;
             } catch (ClassNotFoundException e) {
